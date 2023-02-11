@@ -6,7 +6,6 @@ const bot = new Bot(process.env.TOKEN);
 bot.init(db);
 
 const server = http.createServer((_, response) => {
-  console.log('bot isLive', bot.isLive());
   response.writeHead(bot.isLive() ? 200 : 500);
   response.end();
 });
