@@ -10,13 +10,13 @@ specifiers:
   typescript: ^4.9.5
 
 dependencies:
-  dotenv: 16.0.3
   telegraf: 4.11.2
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   typescript: 4.9.5
 
 devDependencies:
   '@types/node': 18.13.0
+  dotenv: 16.0.3
   nodemon: 2.0.20
   prettier: 2.8.4
 
@@ -191,7 +191,7 @@ packages:
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
-    dev: false
+    dev: true
 
   /event-target-shim/5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}

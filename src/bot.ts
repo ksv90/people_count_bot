@@ -19,6 +19,8 @@ function getUser({ first_name, last_name, username }: User, i: number): string {
 }
 
 export class Bot<TContext extends Context> {
+  private live = true;
+
   private bot: Telegraf<TContext>;
 
   private list = new Array<User>();
@@ -37,15 +39,24 @@ export class Bot<TContext extends Context> {
   async init(db: string): Promise<void> {
     this.db = path.join(process.cwd(), db);
     this.list = JSON.parse(await readFile(this.db, { encoding: 'utf-8' }));
-    process.once('SIGINT', () => this.bot.stop('SIGINT'));
-    process.once('SIGTERM', () => this.bot.stop('SIGTERM'));
+    process.once('SIGINT', () => this.remove('SIGINT'));
+    process.once('SIGTERM', () => this.remove('SIGTERM'));
     try {
-      console.info('Bot is running!');
+      console.info('Bot started!');
       await this.bot.launch();
     } catch {
       console.info('Bot stopped!');
-      this.bot.stop();
+      this.remove();
     }
+  }
+
+  remove(text?: string): void {
+    this.live = false;
+    this.bot.stop(text);
+  }
+
+  isLive(): boolean {
+    return this.live;
   }
 
   private subscribe = <T extends Context>(ctx: T) => {
