@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm nodemon",
-    "start": "npx ts-node -r dotenv/config ./src/index.ts"
+    "start": "npx ts-node ./src/index.ts"
   },
   "keywords": [],
   "author": "",
