@@ -37,13 +37,14 @@ export class Bot<TContext extends Context> {
   async init(db: string): Promise<void> {
     this.db = path.join(process.cwd(), db);
     this.list = JSON.parse(await readFile(this.db, { encoding: 'utf-8' }));
-    const stop = () => this.bot.stop('SIGINT');
-    process.once('SIGINT', stop);
-    process.once('SIGTERM', stop);
+    process.once('SIGINT', () => this.bot.stop('SIGINT'));
+    process.once('SIGTERM', () => this.bot.stop('SIGTERM'));
     try {
+      console.info('Bot is running!');
       await this.bot.launch();
     } catch {
-      stop();
+      console.info('Bot stopped!');
+      this.bot.stop();
     }
   }
 

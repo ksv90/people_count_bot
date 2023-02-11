@@ -21,7 +21,7 @@
     "prettier": "^2.8.4"
   },
   "engines": {
-    "node": ">=16.0.0",
+    "node": ">=16 <17",
     "pnpm": ">=7.0.0"
   },
   "packageManager": "pnpm@7.17.0"
