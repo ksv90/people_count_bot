@@ -11,4 +11,4 @@ const server = http.createServer((_, response) => {
   response.end();
 });
 
-server.listen(process.env.PATH, () => console.log('Server is running'));
+server.listen(process.env.PORT, () => console.log('Server is running'));
