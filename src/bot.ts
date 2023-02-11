@@ -42,12 +42,8 @@ export class Bot<TContext extends Context> {
     this.list = JSON.parse(await readFile(this.db, { encoding: 'utf-8' }));
     process.once('SIGINT', () => this.remove('SIGINT'));
     process.once('SIGTERM', () => this.remove('SIGTERM'));
-    try {
-      console.info('Bot started!');
-      await this.bot.launch();
-    } catch {
-      this.remove();
-    }
+    console.info('Bot started!');
+    this.bot.launch();
   }
 
   remove(text?: string): void {
