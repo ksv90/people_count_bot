@@ -8,14 +8,14 @@ const UNSUBSCRUBE = 'unsubscribe';
 
 function checkCommand<T extends Context>(ctx: T, ...messages: ReadonlyArray<string>) {
   if (!!ctx.message && 'text' in ctx.message) {
-    const { text } = ctx.message;
-    return messages.some((m) => m.toLowerCase() === text);
+    const text = ctx.message.text.toLowerCase();
+    return messages.some((m) => m === text);
   }
   return false;
 }
 
-function getUser({ first_name, last_name, username }: User): string {
-  return `${first_name ?? ''} ${last_name ?? ''} ${username ? '<' + username + '>' : ''}`;
+function getUser({ first_name, last_name, username }: User, i: number): string {
+  return `${i + 1}. ${first_name ?? ''} ${last_name ?? ''} ${username ? '<' + username + '>' : ''}`;
 }
 
 export class Bot<TContext extends Context> {
