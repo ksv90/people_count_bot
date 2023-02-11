@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+dist/
+build/
+.DS_Store
+Thumbs.db
+.parcel-cache/
+.idea/
+.vscode/
+.history/
+*.log
+package-lock.json
+yarn.lock
+.husky/
