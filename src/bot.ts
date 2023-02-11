@@ -37,9 +37,14 @@ export class Bot<TContext extends Context> {
   async init(db: string): Promise<void> {
     this.db = path.join(process.cwd(), db);
     this.list = JSON.parse(await readFile(this.db, { encoding: 'utf-8' }));
-    this.bot.launch();
-    process.once('SIGINT', () => this.bot.stop('SIGINT'));
-    process.once('SIGTERM', () => this.bot.stop('SIGTERM'));
+    const stop = () => this.bot.stop('SIGINT');
+    process.once('SIGINT', stop);
+    process.once('SIGTERM', stop);
+    try {
+      await this.bot.launch();
+    } catch {
+      stop();
+    }
   }
 
   private subscribe = <T extends Context>(ctx: T) => {
