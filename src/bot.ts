@@ -30,6 +30,7 @@ export class Bot<TContext extends Context> {
   constructor(token: string | undefined) {
     if (!token) throw new Error('Token not found');
     this.bot = new Telegraf(token);
+    this.bot.catch(() => this.remove());
     this.bot.action(SUBSCRIBE, this.subscribe);
     this.bot.action(UNSUBSCRUBE, this.unsubscribe);
     this.bot.use(this.applicationMiddleware());
@@ -45,12 +46,12 @@ export class Bot<TContext extends Context> {
       console.info('Bot started!');
       await this.bot.launch();
     } catch {
-      console.info('Bot stopped!');
       this.remove();
     }
   }
 
   remove(text?: string): void {
+    console.info('Bot stopped!');
     this.live = false;
     this.bot.stop(text);
   }
